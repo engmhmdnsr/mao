@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concept 2: Engineering Telemetry HUD | Manar Al Omran</title>
+    <link rel="icon" href="assets/logo.png" type="image/png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Base Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Concept 2 Custom Styling -->
+    <style>
+        :root {
+            --c2-gold: #FAC819;
+            --c2-cyan: #00E5FF;
+            --c2-dark: #0A0C10;
+            --c2-surface: #12161F;
+            --c2-card: #181E2B;
+            --c2-border: rgba(0, 229, 255, 0.2);
+            --c2-gold-border: rgba(250, 200, 25, 0.3);
+        }
+        
+        body {
+            background-color: var(--c2-dark);
+            font-family: 'Space Grotesk', sans-serif;
+            background-image: 
+                linear-gradient(rgba(0, 229, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Switcher Bar */
+        .concept-switcher-bar {
+            background: #000;
+            border-bottom: 2px solid var(--c2-cyan);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            position: sticky;
+            top: 0;
+            z-index: 9999;
+        }
+        .concept-nav-links { display: flex; gap: 12px; }
+        .c-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 700;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            transition: all 0.2s;
+        }
+        .c-badge.active { background: var(--c2-cyan); color: #000; border-color: var(--c2-cyan); }
+        .c-badge:hover:not(.active) { border-color: var(--c2-cyan); color: var(--c2-cyan); }
+
+        /* HUD Live Header Strip */
+        .c2-hud-ticker {
+            background: rgba(18, 22, 31, 0.95);
+            border-bottom: 1px solid var(--c2-border);
+            padding: 8px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            color: #8E9AB0;
+            letter-spacing: 0.06em;
+        }
+        .c2-hud-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .c2-live-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #00FF66;
+            font-weight: 700;
+        }
+        .c2-pulse {
+            width: 8px;
+            height: 8px;
+            background: #00FF66;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00FF66;
+            animation: pulse 1.8s infinite;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        /* Command Center Hero */
+        .c2-hero {
+            padding: 70px 0 90px;
+            position: relative;
+        }
+        .c2-hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 229, 255, 0.08);
+            border: 1px solid var(--c2-border);
+            color: var(--c2-cyan);
+            padding: 6px 16px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            margin-bottom: 24px;
+        }
+        .c2-hero-title {
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.12;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+        }
+        .c2-hero-title span {
+            color: var(--c2-gold);
+            text-shadow: 0 0 25px rgba(250, 200, 25, 0.3);
+        }
+
+        /* Interactive Telemetry Box */
+        .c2-telemetry-dashboard {
+            background: var(--c2-surface);
+            border: 1px solid var(--c2-border);
+            border-radius: 14px;
+            padding: 32px;
+            margin-top: 40px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+            position: relative;
+        }
+        .c2-telemetry-dashboard::before {
+            content: "ENGINEERING_TELEMETRY // SBC-18218";
+            position: absolute;
+            top: -10px;
+            left: 24px;
+            background: var(--c2-dark);
+            padding: 0 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--c2-cyan);
+            border: 1px solid var(--c2-border);
+        }
+        .c2-dashboard-metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+        .c2-metric-box {
+            background: var(--c2-card);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .c2-metric-box:hover {
+            border-color: var(--c2-gold);
+        }
+        .c2-metric-val {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--c2-gold);
+        }
+        .c2-metric-lbl {
+            font-size: 0.78rem;
+            color: #7E8494;
+            text-transform: uppercase;
+        }
+
+        /* Interactive Load Calculator Section */
+        .c2-calc-wrapper {
+            background: var(--c2-surface);
+            border: 1px solid var(--c2-gold-border);
+            border-radius: 16px;
+            padding: 40px;
+            margin-top: 60px;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 40px;
+        }
+        .c2-calc-output {
+            background: var(--c2-card);
+            border: 1px solid var(--c2-border);
+            border-radius: 12px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .c2-gauge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--c2-cyan);
+            text-shadow: 0 0 25px rgba(0, 229, 255, 0.4);
+            text-align: center;
+            margin: 16px 0;
+        }
+
+        @media (max-width: 992px) {
+            .c2-dashboard-metrics { grid-template-columns: 1fr 1fr; }
+            .c2-calc-wrapper { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 576px) {
+            .c2-dashboard-metrics { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Switcher -->
+    <div class="concept-switcher-bar">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="color: var(--c2-cyan);">✦ DESIGN CONCEPTS:</span>
+            <span>MANAR AL OMRAN HOMEPAGE</span>
+        </div>
+        <div class="concept-nav-links">
+            <a href="index-concept-1.html" class="c-badge">Concept 1: Monolith</a>
+            <a href="index-concept-2.html" class="c-badge active">Concept 2: Telemetry HUD</a>
+            <a href="index-concept-3.html" class="c-badge">Concept 3: Luxury Editorial</a>
+            <a href="index.html" class="c-badge" style="background: rgba(255,255,255,0.1);">Original</a>
+        </div>
+    </div>
+
+    <!-- HUD Ticker -->
+    <div class="c2-hud-ticker">
+        <div class="container c2-hud-grid">
+            <div style="display: flex; align-items: center; gap: 16px;">
+                <span class="c2-live-tag"><span class="c2-pulse"></span> TELEMETRY LIVE</span>
+                <span>FLEET INVENTORY: 150,000+ TONS CERTIFIED</span>
+            </div>
+            <div>
+                <span>SYS_STATUS: OPTIMAL</span> &bull; <span>COMPLIANCE: SBC / ISO 9001 / DIN 18218</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav id="navbar" class="navbar-sticky">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="assets/logo-white.png" alt="Manar Al Omran Logo">
+                <div class="brand-text">
+                    <span class="title">MANAR AL OMRAN</span>
+                    <span class="sub">ENGINEERING &bull; EST. 1974</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about-us.html">About</a></li>
+                <li><a href="our-services.html">Services</a></li>
+                <li><a href="our-products.html">Products</a></li>
+                <li><a href="our-projects.html">Projects</a></li>
+                <li><a href="virtual-tour.html">3D Showroom</a></li>
+                <li><a href="contact-us.html">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="#calculator" class="btn btn-primary" style="font-family: 'JetBrains Mono';">Live Load Calculator</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== HERO: TELEMETRY COMMAND CENTER ==================== -->
+    <section class="c2-hero">
+        <div class="container">
+            <div class="c2-hero-badge">
+                <span>[ COORDINATES: 26.4207° N, 50.0888° E // DAMMAM HQ ]</span>
+            </div>
+            
+            <h1 class="c2-hero-title">PRECISION STRUCTURAL FORMWORK.<br><span>150,000+ TONS FLEET MOBILIZATION.</span></h1>
+            <p style="font-size: 1.15rem; color: #A0A5B5; max-width: 680px; line-height: 1.7; margin-bottom: 36px;">Manar Al Omran engineering infrastructure delivers certified heavy-duty falsework, modular wall formwork, and automated hydraulic systems for Saudi Arabia's landmark gigaprojects.</p>
+
+            <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                <a href="#calculator" class="btn btn-primary btn-lg">Launch Load Calculator &rarr;</a>
+                <a href="our-products.html" class="btn btn-secondary btn-lg">Browse Engineering Catalog</a>
+                <a href="https://manar-alomran.smart-media.agency/virtual-tour/" target="_blank" class="btn btn-secondary btn-lg" style="border-color: var(--c2-cyan); color: var(--c2-cyan);">🚀 360° Showroom Tour</a>
+            </div>
+
+            <!-- Live Telemetry Dashboard -->
+            <div class="c2-telemetry-dashboard reveal">
+                <div class="c2-dashboard-metrics">
+                    <div class="c2-metric-box">
+                        <span class="c2-metric-lbl">Fleet Stock Capacity</span>
+                        <div class="c2-metric-val">150,000 T</div>
+                        <span style="font-size: 0.72rem; color: #00FF66; font-family: 'JetBrains Mono';">● Mobilization Ready</span>
+                    </div>
+                    <div class="c2-metric-box">
+                        <span class="c2-metric-lbl">Max Falsework Leg Load</span>
+                        <div class="c2-metric-val">100 kN</div>
+                        <span style="font-size: 0.72rem; color: var(--c2-cyan); font-family: 'JetBrains Mono';">BS EN 12812 Standard</span>
+                    </div>
+                    <div class="c2-metric-box">
+                        <span class="c2-metric-lbl">Max Fresh Concrete Pressure</span>
+                        <div class="c2-metric-val">80 kN/m²</div>
+                        <span style="font-size: 0.72rem; color: var(--c2-cyan); font-family: 'JetBrains Mono';">DIN 18218 Certified</span>
+                    </div>
+                    <div class="c2-metric-box">
+                        <span class="c2-metric-lbl">Operational Heritage</span>
+                        <div class="c2-metric-val">50 YRS</div>
+                        <span style="font-size: 0.72rem; color: var(--c2-gold); font-family: 'JetBrains Mono';">Since 1974 in GCC</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Load Calculator -->
+            <div id="calculator" class="c2-calc-wrapper reveal">
+                <div>
+                    <span style="font-family: 'JetBrains Mono'; color: var(--c2-gold); font-size: 0.8rem; font-weight: 700;">// STRUCTURAL CALCULATOR WIDGET</span>
+                    <h2 style="color: #fff; font-size: 1.8rem; margin: 10px 0 20px;">INTERACTIVE CONCRETE PRESSURE COMPUTATION</h2>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; color: #fff; font-size: 0.9rem; margin-bottom: 8px;">1. Structural Element:</label>
+                        <select id="calc-type" style="width: 100%; background: var(--c2-card); border: 1px solid var(--c2-border); color: #fff; padding: 12px; border-radius: 6px;">
+                            <option value="wall">Reinforced Concrete Wall / Core</option>
+                            <option value="column">Heavy Universal Column Mold</option>
+                            <option value="slab">High-Ceiling Slab / Transfer Plate</option>
+                            <option value="tunnel">Vaulted Tunnel / Infrastructure</option>
+                        </select>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; color: #fff; font-size: 0.9rem; margin-bottom: 8px;">
+                            <span>2. Pouring Height:</span>
+                            <span id="calc-height-val" style="color: var(--c2-gold); font-family: 'JetBrains Mono';">4.0 m</span>
+                        </div>
+                        <input type="range" id="calc-height" min="2.0" max="12.0" step="0.5" value="4.0" style="width: 100%;">
+                    </div>
+                </div>
+
+                <div class="c2-calc-output">
+                    <div style="display: flex; justify-content: space-between; font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--c2-cyan);">
+                        <span>CALCULATED HYDROSTATIC LOAD</span>
+                        <span>DIN 18218</span>
+                    </div>
+
+                    <div class="c2-gauge">
+                        <span id="calc-pressure-val">65</span>
+                        <span style="font-size: 1rem; color: #7E8494; display: block;">kN / m²</span>
+                    </div>
+
+                    <div style="background: rgba(0,0,0,0.4); padding: 16px; border-radius: 8px; border: 1px solid rgba(250,200,25,0.3);">
+                        <span id="calc-system-badge" style="font-family: 'JetBrains Mono'; font-size: 0.72rem; color: var(--c2-gold); display: block;">RECOMMENDED SYSTEM</span>
+                        <h4 id="calc-system-title" style="color: #fff; font-size: 1.1rem; margin: 4px 0;">Profemax Heavy-Duty Wall System</h4>
+                    </div>
+
+                    <a href="contact-us.html" class="btn btn-primary" style="margin-top: 20px; width: 100%;">Request Official Static Calculation &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" class="site-footer">
+        <div class="container" style="text-align: center; padding: 40px 0;">
+            <p>&copy; 1974 &ndash; 2026 Manar Al Omran Trading &amp; Industrial Co. Ltd. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

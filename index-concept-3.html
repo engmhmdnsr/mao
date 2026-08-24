@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concept 3: Industrial Luxury Editorial | Manar Al Omran</title>
+    <link rel="icon" href="assets/logo.png" type="image/png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- Base Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Concept 3 Custom Styling -->
+    <style>
+        :root {
+            --c3-gold: #FAC819;
+            --c3-dark: #0D0E12;
+            --c3-surface: #17181F;
+            --c3-border: rgba(255, 255, 255, 0.12);
+        }
+        
+        body {
+            background-color: var(--c3-dark);
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Switcher */
+        .concept-switcher-bar {
+            background: #000;
+            border-bottom: 2px solid #fff;
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            position: sticky;
+            top: 0;
+            z-index: 9999;
+        }
+        .concept-nav-links { display: flex; gap: 12px; }
+        .c-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 700;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            transition: all 0.2s;
+        }
+        .c-badge.active { background: #fff; color: #000; border-color: #fff; }
+        .c-badge:hover:not(.active) { border-color: #fff; }
+
+        /* Editorial Hero */
+        .c3-hero {
+            padding: 90px 0 100px;
+            border-bottom: 1px solid var(--c3-border);
+        }
+        .c3-monumental-header {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(3.2rem, 7.5vw, 6.5rem);
+            line-height: 0.95;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            margin-bottom: 40px;
+        }
+        .c3-monumental-header .c3-accent {
+            color: var(--c3-gold);
+            font-style: italic;
+        }
+        .c3-hero-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: flex-end;
+            padding-top: 30px;
+            border-top: 1px solid var(--c3-border);
+        }
+        .c3-hero-lead {
+            font-size: 1.25rem;
+            color: #B2B7C6;
+            line-height: 1.65;
+        }
+
+        /* Editorial Featured Grid */
+        .c3-editorial-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 0.6fr;
+            gap: 32px;
+            margin-top: 48px;
+        }
+        .c3-big-feature {
+            background: var(--c3-surface);
+            border: 1px solid var(--c3-border);
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+            height: 540px;
+        }
+        .c3-big-feature img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s;
+        }
+        .c3-big-feature:hover img {
+            transform: scale(1.05);
+        }
+        .c3-feature-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 40px;
+            background: linear-gradient(to top, rgba(13,14,18,0.95) 0%, transparent 100%);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        .c3-side-column {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+        .c3-side-card {
+            background: var(--c3-surface);
+            border: 1px solid var(--c3-border);
+            border-radius: 20px;
+            padding: 32px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s;
+        }
+        .c3-side-card:hover {
+            border-color: var(--c3-gold);
+            transform: translateX(6px);
+        }
+
+        @media (max-width: 992px) {
+            .c3-hero-row { grid-template-columns: 1fr; gap: 24px; }
+            .c3-editorial-grid { grid-template-columns: 1fr; }
+            .c3-big-feature { height: 400px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Switcher -->
+    <div class="concept-switcher-bar">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="color: var(--c3-gold);">✦ DESIGN CONCEPTS:</span>
+            <span>MANAR AL OMRAN HOMEPAGE</span>
+        </div>
+        <div class="concept-nav-links">
+            <a href="index-concept-1.html" class="c-badge">Concept 1: Monolith</a>
+            <a href="index-concept-2.html" class="c-badge">Concept 2: Telemetry HUD</a>
+            <a href="index-concept-3.html" class="c-badge active">Concept 3: Luxury Editorial</a>
+            <a href="index.html" class="c-badge" style="background: rgba(255,255,255,0.1);">Original</a>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav id="navbar" class="navbar-sticky">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="assets/logo-white.png" alt="Manar Al Omran Logo">
+                <div class="brand-text">
+                    <span class="title">MANAR AL OMRAN</span>
+                    <span class="sub">ENGINEERING &bull; EST. 1974</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about-us.html">About</a></li>
+                <li><a href="our-services.html">Services</a></li>
+                <li><a href="our-products.html">Products</a></li>
+                <li><a href="our-projects.html">Projects</a></li>
+                <li><a href="virtual-tour.html">3D Showroom</a></li>
+                <li><a href="contact-us.html">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="contact-us.html" class="btn btn-primary">Start Consultation &rarr;</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== HERO: LUXURY EDITORIAL ==================== -->
+    <section class="c3-hero">
+        <div class="container">
+            <div style="font-family: 'JetBrains Mono'; font-size: 0.85rem; color: var(--c3-gold); margin-bottom: 20px; letter-spacing: 0.15em;">
+                // ESTABLISHED 1974 &mdash; 50 YEARS OF HEAVY ENGINEERING
+            </div>
+
+            <h1 class="c3-monumental-header">
+                WE SHAPE<br>
+                THE GIGA<br>
+                <span class="c3-accent">FOUNDATIONS.</span>
+            </h1>
+
+            <div class="c3-hero-row">
+                <p class="c3-hero-lead">Operating 150,000+ tons fleet capacity across the Kingdom of Saudi Arabia. Manar Al Omran engineers high-load formwork systems, 100 kN falsework, and automated travelers for monumental infrastructure.</p>
+                
+                <div style="display: flex; gap: 16px; justify-content: flex-end; flex-wrap: wrap;">
+                    <a href="our-products.html" class="btn btn-primary btn-lg">Explore Full Catalog &rarr;</a>
+                    <a href="virtual-tour.html" class="btn btn-secondary btn-lg">Virtual Showroom</a>
+                </div>
+            </div>
+
+            <!-- Editorial Feature Grid -->
+            <div class="c3-editorial-grid reveal">
+                <div class="c3-big-feature">
+                    <img src="assets/img/hero1.jpg" alt="Diriyah Square Landmark Shoring">
+                    <div class="c3-feature-overlay">
+                        <div>
+                            <span style="background: var(--c3-gold); color: #000; font-family: 'JetBrains Mono'; font-weight: 800; font-size: 0.75rem; padding: 4px 10px; border-radius: 4px;">FEATURED GIGAPROJECT</span>
+                            <h2 style="color: #fff; font-size: 2.2rem; margin: 10px 0 6px; font-family: 'Archivo Black';">DIRIYAH SQUARE CAR PARK</h2>
+                            <p style="color: #ccc; font-size: 0.95rem;">Subterranean falsework engineering with Shorbrace 100 kN modular towers in Riyadh.</p>
+                        </div>
+                        <a href="project-diriyah-square.html" class="btn btn-primary">Read Case Study &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="c3-side-column">
+                    <div class="c3-side-card">
+                        <div>
+                            <span style="color: var(--c3-gold); font-family: 'JetBrains Mono'; font-size: 0.8rem; font-weight: 700;">// 01 WALL &amp; CORE SYSTEMS</span>
+                            <h3 style="color: #fff; font-size: 1.4rem; margin: 8px 0 12px;">Profemax Heavy Wall Formwork</h3>
+                            <p style="color: #9C9C9F; font-size: 0.9rem; line-height: 1.6;">80 kN/m² hydrostatic pressure resistance for fast crane-assisted cycling.</p>
+                        </div>
+                        <a href="product-profemax.html" style="color: #fff; font-weight: 700; margin-top: 16px;">View System Specs &rarr;</a>
+                    </div>
+
+                    <div class="c3-side-card">
+                        <div>
+                            <span style="color: var(--c3-gold); font-family: 'JetBrains Mono'; font-size: 0.8rem; font-weight: 700;">// 02 3D VIRTUAL EXPERIENCE</span>
+                            <h3 style="color: #fff; font-size: 1.4rem; margin: 8px 0 12px;">Interactive 360° Showroom</h3>
+                            <p style="color: #9C9C9F; font-size: 0.9rem; line-height: 1.6;">Inspect scale models and assembled systems in high definition.</p>
+                        </div>
+                        <a href="https://manar-alomran.smart-media.agency/virtual-tour/" target="_blank" style="color: var(--c3-gold); font-weight: 700; margin-top: 16px;">Launch Virtual Tour &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" class="site-footer">
+        <div class="container" style="text-align: center; padding: 40px 0;">
+            <p>&copy; 1974 &ndash; 2026 Manar Al Omran Trading &amp; Industrial Co. Ltd. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

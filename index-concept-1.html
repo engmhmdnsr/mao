@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concept 1: Architectural Monolith | Manar Al Omran</title>
+    <link rel="icon" href="assets/logo.png" type="image/png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Base Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Concept 1 Custom Styling -->
+    <style>
+        :root {
+            --c1-gold: #FAC819;
+            --c1-dark: #121316;
+            --c1-surface: #1E1F24;
+            --c1-card: #27282F;
+            --c1-border: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Concept Banner */
+        .concept-switcher-bar {
+            background: #000;
+            border-bottom: 2px solid var(--c1-gold);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            position: sticky;
+            top: 0;
+            z-index: 9999;
+        }
+        .concept-nav-links {
+            display: flex;
+            gap: 12px;
+        }
+        .c-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 700;
+            border: 1px solid var(--c1-border);
+            color: #fff;
+            transition: all 0.2s;
+        }
+        .c-badge.active {
+            background: var(--c1-gold);
+            color: #000;
+            border-color: var(--c1-gold);
+        }
+        .c-badge:hover:not(.active) {
+            border-color: var(--c1-gold);
+            color: var(--c1-gold);
+        }
+
+        /* Hero 1: Cinematic Split Screen */
+        .c1-hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: radial-gradient(circle at 70% 30%, rgba(250, 200, 25, 0.08) 0%, transparent 60%), #121316;
+            overflow: hidden;
+            padding: 60px 0 80px;
+        }
+        .c1-hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 50px;
+            align-items: center;
+        }
+        .c1-hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(250, 200, 25, 0.12);
+            color: var(--c1-gold);
+            border: 1px solid rgba(250, 200, 25, 0.3);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+        .c1-hero-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+            line-height: 1.08;
+            color: #fff;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+        .c1-hero-title span {
+            color: var(--c1-gold);
+        }
+        .c1-hero-lead {
+            font-size: 1.15rem;
+            color: #A0A5B5;
+            line-height: 1.7;
+            margin-bottom: 36px;
+            max-width: 580px;
+        }
+        .c1-hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 48px;
+        }
+        .c1-hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding-top: 30px;
+            border-top: 1px solid var(--c1-border);
+        }
+        .c1-stat-num {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 2rem;
+            color: var(--c1-gold);
+            line-height: 1;
+        }
+        .c1-stat-lbl {
+            font-size: 0.8rem;
+            color: #7E8494;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 6px;
+        }
+
+        /* Hero Interactive Frame */
+        .c1-visual-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: var(--c1-surface);
+            border: 1px solid var(--c1-border);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            transition: all 0.4s ease;
+        }
+        .c1-visual-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--c1-gold);
+            box-shadow: 0 25px 60px rgba(250, 200, 25, 0.2);
+        }
+        .c1-visual-img {
+            height: 480px;
+            position: relative;
+        }
+        .c1-visual-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .c1-visual-card:hover .c1-visual-img img {
+            transform: scale(1.04);
+        }
+        .c1-visual-footer {
+            padding: 20px 24px;
+            background: #18191E;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--c1-border);
+        }
+        
+        /* 3D Tilt Systems Matrix */
+        .c1-systems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 28px;
+            margin-top: 40px;
+        }
+        .c1-system-card {
+            background: var(--c1-surface);
+            border: 1px solid var(--c1-border);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        .c1-system-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: transparent;
+            transition: background 0.3s;
+        }
+        .c1-system-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--c1-gold);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+        }
+        .c1-system-card:hover::before {
+            background: var(--c1-gold);
+        }
+        .c1-sys-img {
+            height: 220px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .c1-sys-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .c1-system-card:hover .c1-sys-img img {
+            transform: scale(1.08);
+        }
+        .c1-sys-tag {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(0,0,0,0.85);
+            color: var(--c1-gold);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(250, 200, 25, 0.4);
+        }
+
+        /* Interactive Showcase Tabs */
+        .c1-tab-btn-group {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 36px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .c1-tab-btn {
+            background: var(--c1-surface);
+            border: 1px solid var(--c1-border);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-transform: uppercase;
+        }
+        .c1-tab-btn.active, .c1-tab-btn:hover {
+            background: var(--c1-gold);
+            color: #000;
+            border-color: var(--c1-gold);
+            box-shadow: 0 0 20px rgba(250, 200, 25, 0.35);
+        }
+
+        @media (max-width: 992px) {
+            .c1-hero-grid { grid-template-columns: 1fr; }
+            .c1-systems-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Concept Switcher Bar -->
+    <div class="concept-switcher-bar">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="color: var(--c1-gold);">✦ DESIGN CONCEPTS:</span>
+            <span>MANAR AL OMRAN HOMEPAGE</span>
+        </div>
+        <div class="concept-nav-links">
+            <a href="index-concept-1.html" class="c-badge active">Concept 1: Monolith</a>
+            <a href="index-concept-2.html" class="c-badge">Concept 2: Telemetry HUD</a>
+            <a href="index-concept-3.html" class="c-badge">Concept 3: Luxury Editorial</a>
+            <a href="index.html" class="c-badge" style="background: rgba(255,255,255,0.1);">Original</a>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav id="navbar" class="navbar-sticky">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="assets/logo-white.png" alt="Manar Al Omran Logo">
+                <div class="brand-text">
+                    <span class="title">MANAR AL OMRAN</span>
+                    <span class="sub">ENGINEERING &bull; EST. 1974</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about-us.html">About</a></li>
+                <li><a href="our-services.html">Services</a></li>
+                <li><a href="our-products.html">Products</a></li>
+                <li><a href="our-projects.html">Projects</a></li>
+                <li><a href="virtual-tour.html">3D Showroom</a></li>
+                <li><a href="contact-us.html">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="contact-us.html" class="btn btn-quote">Get Engineering Quote</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== HERO: ARCHITECTURAL MONOLITH ==================== -->
+    <section class="c1-hero">
+        <div class="container">
+            <div class="c1-hero-grid">
+                <div class="c1-hero-content reveal">
+                    <div class="c1-hero-tag">
+                        <span>●</span> 50-YEAR ENGINEERING SUPREMACY // EST. 1974
+                    </div>
+                    <h1 class="c1-hero-title">HEAVY FORMWORK.<br><span>MONOLITHIC SCALE.</span></h1>
+                    <p class="c1-hero-lead">Mobilizing over 150,000 tons of certified modular formwork and heavy shoring towers across Saudi Arabia and the GCC. Engineering the backbone of Vision 2030 landmarks.</p>
+                    
+                    <div class="c1-hero-actions">
+                        <a href="#systems" class="btn btn-primary btn-lg">Explore Systems Portfolio &rarr;</a>
+                        <a href="virtual-tour.html" class="btn btn-secondary btn-lg">360° Virtual Tour</a>
+                    </div>
+                    
+                    <div class="c1-hero-stats">
+                        <div>
+                            <div class="c1-stat-num">150K+</div>
+                            <div class="c1-stat-lbl">Tons Fleet Capacity</div>
+                        </div>
+                        <div>
+                            <div class="c1-stat-num">100 kN</div>
+                            <div class="c1-stat-lbl">Shoring Leg Capacity</div>
+                        </div>
+                        <div>
+                            <div class="c1-stat-num">50 Yrs</div>
+                            <div class="c1-stat-lbl">GCC Heritage</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="c1-visual-card reveal">
+                    <div class="c1-visual-img">
+                        <img src="assets/img/hero1.jpg" alt="Diriyah Square Underground Mega Formwork">
+                    </div>
+                    <div class="c1-visual-footer">
+                        <div>
+                            <div style="font-weight: 800; font-size: 1.1rem; color: #fff;">Diriyah Square Car Park</div>
+                            <div style="font-size: 0.85rem; color: var(--c1-gold); font-family: 'JetBrains Mono';">📍 Riyadh • 100 kN Shorbrace Fleet</div>
+                        </div>
+                        <a href="project-diriyah-square.html" class="btn btn-primary" style="padding: 8px 16px; font-size: 0.8rem;">Case Study &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CORE SYSTEMS SHOWCASE ==================== -->
+    <section id="systems" class="section-pad" style="background: #18191E;">
+        <div class="container">
+            <div class="section-header reveal" style="text-align: center; margin-bottom: 48px;">
+                <span class="section-tag">ENGINEERING SYSTEMS</span>
+                <h2 class="section-title">CERTIFIED HEAVY FORMWORK &amp; FALSEWORK</h2>
+                <p class="section-desc">Engineered strictly under DIN 18218, BS EN 12812, and Saudi Building Code standards.</p>
+            </div>
+
+            <div class="c1-systems-grid">
+                <!-- System 1: Profemax -->
+                <div class="c1-system-card reveal">
+                    <div class="c1-sys-img">
+                        <span class="c1-sys-tag">HEAVY WALL // 80 kN/m²</span>
+                        <img src="assets/img/profex.jpg" alt="Profemax Wall Formwork">
+                    </div>
+                    <h3 style="color: #fff; font-size: 1.3rem; margin-bottom: 8px;">Profemax Heavy-Duty Wall System</h3>
+                    <p style="color: #9C9C9F; font-size: 0.92rem; margin-bottom: 20px; line-height: 1.6;">High-pressure modular steel formwork engineered for vertical core walls, tall abutments, and universal columns with crane gang cycling.</p>
+                    <a href="product-profemax.html" style="color: var(--c1-gold); font-weight: 700; margin-top: auto; font-family: 'JetBrains Mono';">View Engineering Specs &rarr;</a>
+                </div>
+
+                <!-- System 2: Shorbrace 100 kN -->
+                <div class="c1-system-card reveal">
+                    <div class="c1-sys-img">
+                        <span class="c1-sys-tag">FALSEWORK // 100 kN / LEG</span>
+                        <img src="assets/img/Shorbrace-2.jpg" alt="Shorbrace Falsework Tower">
+                    </div>
+                    <h3 style="color: #fff; font-size: 1.3rem; margin-bottom: 8px;">Shorbrace 100 kN Shoring Towers</h3>
+                    <p style="color: #9C9C9F; font-size: 0.92rem; margin-bottom: 20px; line-height: 1.6;">Triangular modular high-load towers engineered for bridge viaducts, heavy industrial transfer slabs, and high-altitude ceilings.</p>
+                    <a href="product-shorbrace.html" style="color: var(--c1-gold); font-weight: 700; margin-top: auto; font-family: 'JetBrains Mono';">View Engineering Specs &rarr;</a>
+                </div>
+
+                <!-- System 3: Slab Table -->
+                <div class="c1-system-card reveal">
+                    <div class="c1-sys-img">
+                        <span class="c1-sys-tag">HIGH-SPEED SLAB // 3-DAY TURN</span>
+                        <img src="assets/img/bridge-table.jpg" alt="Manar Table Formwork">
+                    </div>
+                    <h3 style="color: #fff; font-size: 1.3rem; margin-bottom: 8px;">Manar Table Formwork System</h3>
+                    <p style="color: #9C9C9F; font-size: 0.92rem; margin-bottom: 20px; line-height: 1.6;">Pre-assembled crane-handled slab tables maximizing repetition efficiency and delivering fast floor turns on high-rise developments.</p>
+                    <a href="product-manar-table.html" style="color: var(--c1-gold); font-weight: 700; margin-top: auto; font-family: 'JetBrains Mono';">View Engineering Specs &rarr;</a>
+                </div>
+
+                <!-- System 4: Tunnel Carriage -->
+                <div class="c1-system-card reveal">
+                    <div class="c1-sys-img">
+                        <span class="c1-sys-tag">INFRASTRUCTURE // HYDRAULIC</span>
+                        <img src="assets/img/Tunnel-Construction-System-1.jpg" alt="Tunnel Hydraulic Formwork Carriage">
+                    </div>
+                    <h3 style="color: #fff; font-size: 1.3rem; margin-bottom: 8px;">Tunnel Construction Hydraulic Carriage</h3>
+                    <p style="color: #9C9C9F; font-size: 0.92rem; margin-bottom: 20px; line-height: 1.6;">Automated motorized portal traveler on rails for continuous vault casting on metro rail lines, highway tunnels, and drainage conduits.</p>
+                    <a href="product-tunnel-construction.html" style="color: var(--c1-gold); font-weight: 700; margin-top: auto; font-family: 'JetBrains Mono';">View Engineering Specs &rarr;</a>
+                </div>
+
+                <!-- System 5: Cuplock Scaffolding -->
+                <div class="c1-system-card reveal">
+                    <div class="c1-sys-img">
+                        <span class="c1-sys-tag">MODULAR // MULTIDIRECTIONAL</span>
+                        <img src="assets/img/IMG_7524-1024x628.jpg" alt="Cuplock Node Scaffolding">
+                    </div>
+                    <h3 style="color: #fff; font-size: 1.3rem; margin-bottom: 8px;">Cuplock &amp; Ringlock Scaffolding</h3>
+                    <p style="color: #9C9C9F; font-size: 0.92rem; margin-bottom: 20px; line-height: 1.6;">Node-locking versatile systems for industrial plant maintenance, structural facade access, and complex geometry falsework grids.</p>
+                    <a href="product-cuplock.html" style="color: var(--c1-gold); font-weight: 700; margin-top: auto; font-family: 'JetBrains Mono';">View Engineering Specs &rarr;</a>
+                </div>
+
+                <!-- System 6: Early Striking -->
+                <div class="c1-system-card reveal">
+                    <div class="c1-sys-img">
+                        <span class="c1-sys-tag">RAPID STRIPPING // DROP-HEAD</span>
+                        <img src="assets/img/Alu-Flex-Amjad-31-copy-1024x633.jpg" alt="Early Striking Drop Head">
+                    </div>
+                    <h3 style="color: #fff; font-size: 1.3rem; margin-bottom: 8px;">Early Striking Drop-Head System</h3>
+                    <p style="color: #9C9C9F; font-size: 0.92rem; margin-bottom: 20px; line-height: 1.6;">Enables deck stripping within 36–48 hours while maintaining undisturbed structural props under load for immediate material cycling.</p>
+                    <a href="product-early-striking.html" style="color: var(--c1-gold); font-weight: 700; margin-top: auto; font-family: 'JetBrains Mono';">View Engineering Specs &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" class="site-footer">
+        <div class="container" style="text-align: center; padding: 40px 0;">
+            <p>&copy; 1974 &ndash; 2026 Manar Al Omran Trading &amp; Industrial Co. Ltd. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
