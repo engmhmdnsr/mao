@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Structural Engineering Showcase | Manar Al Omran</title>
+    <meta name="description" content="A pure structural construction showcase: Formwork and heavy falsework engineering for mega concrete structures, high-rises, and infrastructure across Saudi Arabia.">
+    <link rel="icon" href="assets/logo.png" type="image/png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Base Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Structural Showcase Custom Styling -->
+    <style>
+        :root {
+            --str-gold: #FAC819;
+            --str-gold-glow: rgba(250, 200, 25, 0.25);
+            --str-dark: #0E1014;
+            --str-surface: #171920;
+            --str-card: #20232D;
+            --str-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background-color: var(--str-dark);
+            color: #C2C7D6;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Top Concept Notification */
+        .showcase-banner-top {
+            background: #000;
+            border-bottom: 2px solid var(--str-gold);
+            padding: 10px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            position: sticky;
+            top: 0;
+            z-index: 9999;
+        }
+        .showcase-banner-top a {
+            color: #fff;
+            padding: 4px 14px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.1);
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .showcase-banner-top a:hover {
+            background: var(--str-gold);
+            color: #000;
+        }
+
+        /* Hero Section */
+        .str-hero {
+            position: relative;
+            min-height: 88vh;
+            display: flex;
+            align-items: center;
+            padding: 80px 0;
+            background: linear-gradient(180deg, rgba(14,16,20,0.85) 0%, rgba(14,16,20,0.95) 100%), url('assets/img/hero1.jpg') center/cover no-repeat;
+            border-bottom: 1px solid var(--str-border);
+        }
+        .str-hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(250, 200, 25, 0.12);
+            color: var(--str-gold);
+            border: 1px solid rgba(250, 200, 25, 0.35);
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+        .str-hero-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(2.8rem, 6vw, 4.8rem);
+            color: #fff;
+            line-height: 1.05;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+            max-width: 900px;
+        }
+        .str-hero-title span {
+            color: var(--str-gold);
+        }
+        .str-hero-desc {
+            font-size: 1.2rem;
+            color: #A6ACBE;
+            line-height: 1.7;
+            max-width: 680px;
+            margin-bottom: 36px;
+        }
+        .str-hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 48px;
+        }
+        .str-stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            padding-top: 32px;
+            border-top: 1px solid var(--str-border);
+            max-width: 900px;
+        }
+        .str-stat-val {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 2.2rem;
+            color: var(--str-gold);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+        .str-stat-lbl {
+            font-size: 0.82rem;
+            color: #8A91A5;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Construction Phases Showcase */
+        .str-phase-card {
+            background: var(--str-surface);
+            border: 1px solid var(--str-border);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            transition: all 0.35s ease;
+        }
+        .str-phase-card:hover {
+            border-color: var(--str-gold);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.6);
+            transform: translateY(-4px);
+        }
+        .str-phase-img {
+            height: 100%;
+            min-height: 380px;
+            position: relative;
+            background: #000;
+        }
+        .str-phase-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s;
+        }
+        .str-phase-card:hover .str-phase-img img {
+            transform: scale(1.04);
+        }
+        .str-phase-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.85);
+            color: var(--str-gold);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            font-weight: 800;
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid var(--str-gold);
+        }
+        .str-phase-content {
+            padding: 44px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .str-phase-step {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--str-gold);
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+        }
+        .str-phase-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+        .str-phase-desc {
+            font-size: 1rem;
+            color: #A0A5B8;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+        .str-specs-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            padding-top: 20px;
+            border-top: 1px solid var(--str-border);
+            margin-bottom: 24px;
+        }
+        .str-spec-item {
+            display: flex;
+            flex-direction: column;
+        }
+        .str-spec-item .lbl {
+            font-size: 0.75rem;
+            color: #7E8494;
+            text-transform: uppercase;
+        }
+        .str-spec-item .val {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* Projects Grid */
+        .str-projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 32px;
+        }
+        .str-prj-card {
+            background: var(--str-surface);
+            border: 1px solid var(--str-border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.35s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .str-prj-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--str-gold);
+            box-shadow: 0 16px 36px rgba(0,0,0,0.5);
+        }
+        .str-prj-img {
+            height: 260px;
+            position: relative;
+        }
+        .str-prj-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .str-prj-card:hover .str-prj-img img {
+            transform: scale(1.05);
+        }
+        .str-prj-loc {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            background: rgba(0,0,0,0.85);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-family: 'JetBrains Mono';
+            border: 1px solid var(--str-border);
+        }
+        .str-prj-body {
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .str-prj-body h3 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        .str-prj-body p {
+            font-size: 0.92rem;
+            color: #9C9C9F;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 992px) {
+            .str-phase-card { grid-template-columns: 1fr; }
+            .str-stats-row { grid-template-columns: 1fr 1fr; }
+            .str-projects-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Showcase Banner -->
+    <div class="showcase-banner-top">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="color: var(--str-gold);">🏗️ STRUCTURAL SHOWCASE:</span>
+            <span>MANAR AL OMRAN CONCRETE &amp; HEAVY FALSEWORK</span>
+        </div>
+        <div>
+            <a href="index.html">← Back to Main Site</a>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar-sticky">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="assets/logo-white.png" alt="Manar Al Omran Logo">
+                <div class="brand-text">
+                    <span class="title">MANAR AL OMRAN</span>
+                    <span class="sub">ENGINEERING &bull; EST. 1974</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about-us.html">About Company</a></li>
+                <li><a href="our-services.html">Services &amp; Fleet</a></li>
+                <li><a href="our-products.html">Products</a></li>
+                <li><a href="our-projects.html" class="active">Projects</a></li>
+                <li><a href="virtual-tour.html">3D Showroom</a></li>
+                <li><a href="contact-us.html">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="contact-us.html" class="btn btn-primary">Request Static Study</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== HERO ==================== -->
+    <section class="str-hero">
+        <div class="container">
+            <div class="str-hero-badge">
+                <span>●</span> 150,000+ TONS CERTIFIED FLEET READY FOR DEPLOYMENT
+            </div>
+            
+            <h1 class="str-hero-title">
+                ENGINEERING MEGA<br>
+                <span>CONCRETE STRUCTURES.</span>
+            </h1>
+            
+            <p class="str-hero-desc">Supplying and engineering high-capacity formwork systems, heavy shoring falsework, and hydraulic travelers for Saudi Arabia's giga-developments, subterranean structures, and transportation corridors since 1974.</p>
+            
+            <div class="str-hero-actions">
+                <a href="#phases" class="btn btn-primary btn-lg">Explore Structural Phases &darr;</a>
+                <a href="our-projects.html" class="btn btn-secondary btn-lg">View Landmark Projects</a>
+                <a href="https://manar-alomran.smart-media.agency/virtual-tour/" target="_blank" class="btn btn-secondary btn-lg" style="border-color: var(--str-gold); color: var(--str-gold);">🚀 360° Virtual Showroom</a>
+            </div>
+
+            <div class="str-stats-row">
+                <div>
+                    <div class="str-stat-val">150,000+</div>
+                    <div class="str-stat-lbl">Tons Fleet Capacity</div>
+                </div>
+                <div>
+                    <div class="str-stat-val">100 kN</div>
+                    <div class="str-stat-lbl">Per Leg Shoring Capacity</div>
+                </div>
+                <div>
+                    <div class="str-stat-val">80 kN/m²</div>
+                    <div class="str-stat-lbl">Concrete Pressure Rating</div>
+                </div>
+                <div>
+                    <div class="str-stat-val">50 Years</div>
+                    <div class="str-stat-lbl">Saudi &amp; GCC Heritage</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 1: THE 4 STRUCTURAL STAGES ==================== -->
+    <section id="phases" class="section-pad">
+        <div class="container">
+            <div class="section-header reveal" style="text-align: center; margin-bottom: 56px;">
+                <span class="section-tag">EXECUTION WALKTHROUGH</span>
+                <h2 class="section-title">THE 4 PHASES OF STRUCTURAL CONCRETE FORMING</h2>
+                <p class="section-desc">How Manar Al Omran engineers support every structural element from deep foundations to high-rise slabs.</p>
+            </div>
+
+            <!-- Phase 1: Retaining Walls & Cores -->
+            <div class="str-phase-card reveal">
+                <div class="str-phase-img">
+                    <span class="str-phase-badge">PHASE 01 // FOUNDATIONS &amp; WALLS</span>
+                    <img src="assets/img/profex.jpg" alt="Profemax and Profex Wall Formwork">
+                </div>
+                <div class="str-phase-content">
+                    <span class="str-phase-step">STAGE 01</span>
+                    <h3 class="str-phase-title">Heavy Wall &amp; Elevator Core Formwork</h3>
+                    <p class="str-phase-desc">Modular heavy-duty steel framed panels engineered to resist hydrostatic concrete pressure up to 80 kN/m² with high-speed crane gang cycling. Eliminates form deflection and ensures pristine fair-faced concrete finish.</p>
+                    
+                    <div class="str-specs-list">
+                        <div class="str-spec-item">
+                            <span class="lbl">Primary System</span>
+                            <span class="val">Profemax &amp; Profex</span>
+                        </div>
+                        <div class="str-spec-item">
+                            <span class="lbl">Pressure Resistance</span>
+                            <span class="val">80 kN / m² (DIN 18218)</span>
+                        </div>
+                        <div class="str-spec-item">
+                            <span class="lbl">Crane Handling</span>
+                            <span class="val">Gangable Large Units</span>
+                        </div>
+                        <div class="str-spec-item">
+                            <span class="lbl">Applications</span>
+                            <span class="val">Basements, Cores, Piers</span>
+                        </div>
+                    </div>
+
+                    <a href="product-profemax.html" class="btn btn-primary" style="align-self: flex-start;">Explore Wall Systems &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Phase 2: Columns & Vertical Supports -->
+            <div class="str-phase-card reveal">
+                <div class="str-phase-img">
+                    <span class="str-phase-badge">PHASE 02 // COLUMNS &amp; PIERS</span>
+                    <img src="assets/img/Pro-MINISTRY-1.jpg" alt="Profemax Column Formwork Ministry of Education">
+                </div>
+                <div class="str-phase-content">
+                    <span class="str-phase-step">STAGE 02</span>
+                    <h3 class="str-phase-title">Universal Column Molds &amp; Rigid Circular Steel</h3>
+                    <p class="str-phase-desc">Adjustable windmill-style panels accommodating rectangular column cross-sections up to 100 x 100 cm in 5 cm modular steps, plus rigid circular steel shells for heavy bridge piers with zero blowout risk.</p>
+                    
+                    <div class="str-specs-list">
+                        <div class="str-spec-item">
+                            <span class="lbl">Primary System</span>
+                            <span class="val">Profemax Column &amp; Circular</span>
+                        </div>
+                        <div class="str-spec-item">
+                            <span class="lbl">Cross-Sections</span>
+                            <span class="val">20 to 100 cm (Adjustable)</span>
+                        </div>
+                        <div class="str-spec-item">
+                            <span class="lbl">Max Pour Rate</span>
+                            <span class="val">Full-Height Single Pour</span>
+                        </div>
+                        <div class="str-spec-item">
+                            <span class="lbl">Applications</span>
+                            <span class="val">High-Rises, Bridges, Malls</span>
+                        </div>
+                    </div>
+
+                    <a href="product-circular-column.html" class="btn btn-primary" style="align-self: flex-start;">Explore Column Systems &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Phase 3: Heavy Falsework & Slabs -->
+            <div class="str-phase-card reveal">
+                <div class="str-phase-img">
+                    <span class="str-phase-badge">PHASE 03 // HEAVY SHORING &amp; SLABS</span>
+                    <img src="assets/img/Shorbrace-2.jpg" alt="Shorbrace 100 kN Heavy Falsework">
+                </div>
+                <div class="str-phase-content">
+                    <span class="str-phase-step">STAGE 03</span>
+                    <h3 class="str-phase-title">100 kN Heavy Shoring Towers &amp; Table Forms</h3>
+                    <p class="str-phase-desc">Modular triangular heavy falsework towers engineered for heavy transfer slabs, thick bridge decks, and subterranean ceiling heights, paired with rapid crane-lifted table forms for 3-day high-rise floor turns.</p>
+                    
+                    <div class="str-specs-list">
+                        <div class="str-spec-item">
+                            <span class="lbl">Primary System</span>
+                            <span class="val">Shorbrace 100 kN &amp; Table Form</span>
+                        </div>
+                        <div class="str-spec-item">
+                            <span class="lbl">Leg Capacity</span>
+                            <span class="val">100 kN per Leg (BS EN 12812)</span>
+                        </div>
+                        <div class="str-spec-item">
+                            <span class="lbl">Stripping Speed</span>
+                            <span class="val">Early Striking (36 Hours)</span>
+                        </div>
+                        <div class="str-spec-item">
+                            <span class="lbl">Applications</span>
+                            <span class="val">Viaducts, Megastructures</span>
+                        </div>
+                    </div>
+
+                    <a href="product-shorbrace.html" class="btn btn-primary" style="align-self: flex-start;">Explore Falsework Systems &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Phase 4: Tunnels & Hydraulic Infrastructure -->
+            <div class="str-phase-card reveal">
+                <div class="str-phase-img">
+                    <span class="str-phase-badge">PHASE 04 // INFRASTRUCTURE &amp; TUNNELS</span>
+                    <img src="assets/img/Tunnel-Construction-System-1.jpg" alt="Tunnel Construction Hydraulic Traveler">
+                </div>
+                <div class="str-phase-content">
+                    <span class="str-phase-step">STAGE 04</span>
+                    <h3 class="str-phase-title">Hydraulic Tunnel Carriages &amp; Bridge Formwork</h3>
+                    <p class="str-phase-desc">Motorized portal traveler carriages advancing on rail tracks for continuous vaulted railway tunnels, metro stations, drainage culverts, and high-span bridge cantilever box girders.</p>
+                    
+                    <div class="str-specs-list">
+                        <div class="str-spec-item">
+                            <span class="lbl">Primary System</span>
+                            <span class="val">Tunnel Carriage &amp; Bridge Table</span>
+                        </div>
+                        <div class="str-spec-item">
+                            <span class="lbl">Advance Mechanism</span>
+                            <span class="val">Hydraulic Rail Advance</span>
+                        </div>
+                        <div class="str-spec-item">
+                            <span class="lbl">Section Geometry</span>
+                            <span class="val">Custom Vaulted / Cut-and-Cover</span>
+                        </div>
+                        <div class="str-spec-item">
+                            <span class="lbl">Applications</span>
+                            <span class="val">Railways, Metros, Culverts</span>
+                        </div>
+                    </div>
+
+                    <a href="product-tunnel-construction.html" class="btn btn-primary" style="align-self: flex-start;">Explore Infrastructure Systems &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 2: LANDMARK STRUCTURAL PROJECTS ==================== -->
+    <section class="section-pad" style="background: #13151B; border-top: 1px solid var(--str-border);">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">SITE EXECUTION RECORD</span>
+                <h2 class="section-title">LANDMARK STRUCTURAL MEGA PROJECTS</h2>
+                <p class="section-desc">Real jobsite deployments across Saudi Arabia and the GCC.</p>
+            </div>
+
+            <div class="str-projects-grid">
+                <!-- Project 1: Diriyah Square -->
+                <div class="str-prj-card reveal">
+                    <div class="str-prj-img">
+                        <img src="assets/img/hero1.jpg" alt="Diriyah Square Car Park Formwork">
+                        <span class="str-prj-loc">📍 Riyadh, Saudi Arabia</span>
+                    </div>
+                    <div class="str-prj-body">
+                        <h3>Diriyah Square Mega Car Park</h3>
+                        <p>Massive subterranean multi-level underground parking structure executed using high-capacity Shorbrace falsework towers and early striking drop-head decking.</p>
+                        <div style="font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--str-gold); margin-top: auto;">
+                            System: Shorbrace 100 kN &bull; Client: DGDA / SP
+                        </div>
+                        <a href="project-diriyah-square.html" class="btn btn-primary" style="margin-top: 16px; width: 100%;">View Structural Case Study &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Project 2: Ministry of Education -->
+                <div class="str-prj-card reveal">
+                    <div class="str-prj-img">
+                        <img src="assets/img/Pro-MINISTRY-1.jpg" alt="Ministry of Education Headquarters Dammam">
+                        <span class="str-prj-loc">📍 Dammam, Saudi Arabia</span>
+                    </div>
+                    <div class="str-prj-body">
+                        <h3>Ministry of Education Headquarters</h3>
+                        <p>Landmark institutional complex constructed with Profemax heavy universal column formwork, delivering rapid single-pour cycling and zero-defect architectural finish.</p>
+                        <div style="font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--str-gold); margin-top: auto;">
+                            System: Profemax Columns &bull; Client: MOE
+                        </div>
+                        <a href="project-ministry-of-education.html" class="btn btn-primary" style="margin-top: 16px; width: 100%;">View Structural Case Study &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Project 3: Salem Balhamer Tower -->
+                <div class="str-prj-card reveal">
+                    <div class="str-prj-img">
+                        <img src="assets/img/salem-tower-1.jpg" alt="Salem Balhamer Commercial Tower">
+                        <span class="str-prj-loc">📍 Dammam, Saudi Arabia</span>
+                    </div>
+                    <div class="str-prj-body">
+                        <h3>Salem Balhamer Commercial Tower</h3>
+                        <p>Prestige high-rise commercial tower formed with rapid crane-handled slab tables and Profex modular wall gangs for accelerated floor cycle turnarounds.</p>
+                        <div style="font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--str-gold); margin-top: auto;">
+                            System: Table Formwork &bull; Client: Balhamer
+                        </div>
+                        <a href="project-salem-balhamer-tower.html" class="btn btn-primary" style="margin-top: 16px; width: 100%;">View Structural Case Study &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CALL TO ACTION ==================== -->
+    <section class="section-pad">
+        <div class="container">
+            <div style="background: var(--str-surface); border: 1px solid var(--str-border); border-radius: 24px; padding: 48px; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center;">
+                <div>
+                    <span class="section-tag" style="background: var(--str-gold); color: #000; font-weight: 800;">ENGINEERING BACKBONE</span>
+                    <h2 style="font-family: 'Archivo Black'; font-size: 2.2rem; color: #fff; margin: 16px 0;">READY TO MOBILIZE 150,000+ TONS FOR YOUR STRUCTURAL PROJECT?</h2>
+                    <p style="color: #A0A5B5; font-size: 1.05rem; line-height: 1.7; margin-bottom: 28px;">Our technical engineering team delivers verified static calculations under Saudi Building Code, customized rental/sale fleet packages, and full jobsite supervision across the Kingdom.</p>
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <a href="contact-us.html" class="btn btn-primary btn-lg">Request Project Engineering Consultation &rarr;</a>
+                        <a href="tel:+966504518066" class="btn btn-secondary btn-lg">Call +966 50 451 8066</a>
+                    </div>
+                </div>
+
+                <div style="text-align: center; background: var(--str-card); padding: 36px; border-radius: 16px; border: 1px solid rgba(250,200,25,0.3);">
+                    <div style="font-size: 2.5rem; margin-bottom: 8px;">🏛️</div>
+                    <h3 style="font-family: 'Archivo Black'; font-size: 1.3rem; color: #fff; margin-bottom: 10px;">Official 3D Virtual Showroom</h3>
+                    <p style="font-size: 0.88rem; color: #8E95A5; margin-bottom: 20px;">Inspect physical scale mockups and assembled falsework towers in 360° high definition.</p>
+                    <a href="https://manar-alomran.smart-media.agency/virtual-tour/" target="_blank" class="btn btn-primary" style="width: 100%;">🚀 Launch 360° Showroom</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" class="site-footer">
+        <div class="container" style="text-align: center; padding: 40px 0;">
+            <p>&copy; 1974 &ndash; 2026 Manar Al Omran Trading &amp; Industrial Co. Ltd. All rights reserved.</p>
+            <p style="font-size: 0.8rem; color: #666; margin-top: 8px;">ISO 9001:2015 &bull; ISO 14001:2015 &bull; ISO 45001:2018 Certified</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
